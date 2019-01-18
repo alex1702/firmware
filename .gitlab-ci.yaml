@@ -1,0 +1,13 @@
+image: ubuntu:latest
+
+before_script:
+  - sudo apt install git subversion python build-essential gawk unzip libncurses5-dev zlib1g-dev libssl-dev wget time
+  - git clone https://github.com/freifunk-gluon/gluon
+   
+build1:
+  stage: build
+  script:
+    - ./build.sh sites.ffnef.han.experimental
+
+
+
