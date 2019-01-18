@@ -30,4 +30,4 @@ script:
 #  - bash templates/duskey/tests/validate_site.sh
 #  - bash templates/dusl2tp/tests/validate_site.sh
 #  - bash templates/dusl2tpkey/tests/validate_site.sh
-  - ./build.sh sites.all.experimental
+  - ./build.sh sites.ffnef.experimental
