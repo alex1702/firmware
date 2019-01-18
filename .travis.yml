@@ -22,6 +22,9 @@ addons:
 #  - luarocks install --local lua-cjson
 #  - apt install git subversion python build-essential gawk unzip libncurses5-dev zlib1g-dev libssl-dev wget time
 
+before_script:
+   - git clone https://github.com/freifunk-gluon/gluon
+
 script:
 #  - bash templates/dus/tests/validate_site.sh
 #  - bash templates/duskey/tests/validate_site.sh
