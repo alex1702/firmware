@@ -3,15 +3,28 @@ language: bash
 addons:
   apt:
     packages:
-    - lua5.1
-    - luarocks
+#    - lua5.1
+#    - luarocks
+    - git
+    - subversion
+    - python
+    - build-essential
+    - gawk
+    - unzip
+    - libncurses5-dev
+    - zlib1g-dev
+    - libssl-dev
+    - wget
+    - time
   
-install:
-  - eval $(luarocks path --bin)
-  - luarocks install --local lua-cjson
+#install:
+#  - eval $(luarocks path --bin)
+#  - luarocks install --local lua-cjson
+#  - apt install git subversion python build-essential gawk unzip libncurses5-dev zlib1g-dev libssl-dev wget time
 
 script:
-  - bash templates/dus/tests/validate_site.sh
-  - bash templates/duskey/tests/validate_site.sh
-  - bash templates/dusl2tp/tests/validate_site.sh
-  - bash templates/dusl2tpkey/tests/validate_site.sh
+#  - bash templates/dus/tests/validate_site.sh
+#  - bash templates/duskey/tests/validate_site.sh
+#  - bash templates/dusl2tp/tests/validate_site.sh
+#  - bash templates/dusl2tpkey/tests/validate_site.sh
+  - ./build.sh sites.all.experimental
