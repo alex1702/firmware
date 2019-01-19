@@ -124,8 +124,9 @@ build_images_for_site ()
     echo "Gluon make update..."
 
     printf -v MAKE_CMD "make update %s"  "$ARGS"
+    echo "===================================================================================================================="
     echo "$MAKE_CMD"
-    eval "$MAKE_CMD"
+    eval "time $MAKE_CMD"
 
     for (( target_index=0; target_index < ${#TARGETS[@]}; target_index += 1 )); do
 
@@ -134,8 +135,9 @@ build_images_for_site ()
       if false; then
         echo "Cleaning the firmware for site code: $SITE_CODE, target: $TARGET ..."
         printf -v MAKE_CMD  "make clean GLUON_TARGET=%q  %s"  "$TARGET"  "$ARGS"
+        echo "===================================================================================================================="
         echo "$MAKE_CMD"
-        eval "$MAKE_CMD"
+        eval "time $MAKE_CMD"
       fi
 
     done
@@ -166,8 +168,9 @@ build_images_for_site ()
 
     MAKE_CMD+=" -j $MAKE_J_VAL  --output-sync=recurse"
 
+    echo "===================================================================================================================="
     echo "$MAKE_CMD"
-    eval "$MAKE_CMD"
+    eval "time $MAKE_CMD"
 
   done
 
@@ -176,8 +179,9 @@ build_images_for_site ()
   echo "Making manifest..."
 
   printf -v MAKE_CMD "make manifest %s"  "$ARGS"
+  echo "===================================================================================================================="
   echo "$MAKE_CMD"
-  eval "$MAKE_CMD"
+  eval "time $MAKE_CMD"
 
   local SITE_IMAGE_DIR="$SANDBOX_DIR/images/$TEMPLATE_NAME/$SITE_CODE/site"
 
@@ -185,7 +189,8 @@ build_images_for_site ()
   # This directory may already exist from a previous run.
   mkdir --parents -- "$SITE_IMAGE_DIR"
 
-  rsync --archive "$SANDBOX_DIR/assembled/$TEMPLATE_NAME/$SITE_CODE/" --exclude '*.old' --exclude '*.backup'  --exclude '*~'  --exclude '*.nonworking'   "$SITE_IMAGE_DIR"
+  echo "===================================================================================================================="
+  time rsync --archive "$SANDBOX_DIR/assembled/$TEMPLATE_NAME/$SITE_CODE/" --exclude '*.old' --exclude '*.backup'  --exclude '*~'  --exclude '*.nonworking'   "$SITE_IMAGE_DIR"
   cp -- "$SANDBOX_DIR/build.sh" "$SITE_IMAGE_DIR/"
 }
 
@@ -209,7 +214,7 @@ build_all_images ()
     TARGETS+=( ipq40xx )
     TARGETS+=( ramips-mt7620 )
     TARGETS+=( ramips-mt76x8 )
-    #TARGETS+=( ramips-rt305x ) # excluded, bugs build fails 
+    #TARGETS+=( ramips-rt305x ) # excluded, bugs build fails
     TARGETS+=( ar71xx-mikrotik )
     TARGETS+=( brcm2708-bcm2710 )
     TARGETS+=( ipq806x )
@@ -239,7 +244,7 @@ build_all_images ()
     # It saves little space compared to the rest of the generated files,
     # and it makes it more inconvenient to open the log file.
     if false; then
-      gzip --best -- "$LOG_FILENAME"
+      time gzip --best -- "$LOG_FILENAME"
     fi
 
   done

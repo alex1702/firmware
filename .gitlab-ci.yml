@@ -11,7 +11,4 @@ stages:
 build:
   stage: build
   script:
-    - ./build.sh sites.ffnef.han.experimental
-
-
-
+    - ./build.sh sites.ffnef.han.experimental ar71xx-generic x86-64
